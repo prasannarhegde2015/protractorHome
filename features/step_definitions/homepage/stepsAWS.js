@@ -12,6 +12,7 @@ var steps = function() {
     browser.driver.ignoreSynchronization = true ;
     browser.driver.get('http://13.126.109.72/home');
 	browser.manage().window().maximize();
+	  console.log("Step 1: Browser was launched");
     callback();
 //  setTimeout(callback, 10000);
   });
