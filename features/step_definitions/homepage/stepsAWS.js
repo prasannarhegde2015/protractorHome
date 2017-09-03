@@ -1,10 +1,31 @@
 //var support = require('../support');
 var chai = require('C:/Users/SONY/AppData/Roaming/npm/node_modules/chai');
+var fs = require('fs');
 var chaiAsPromised = require('C:/Users/SONY/AppData/Roaming/npm/node_modules/chai-as-promised');
 chai.use(chaiAsPromised);
 module.exports = function() {
     this.setDefaultTimeout(60 * 1000);
 }; 
+function writeScreenShot(data, filename,path) {
+        var stream = fs.createWriteStream(path+ filename);
+        stream.write(new Buffer(data, 'base64'));
+        stream.end();
+    }
+function getUserHome() {
+  return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+}
+
+function GetFormattedDate() {
+var todayTime = new Date();
+var month = String(todayTime.getMonth() +1);
+var day = String(todayTime.getDate());
+var year = String(todayTime.getFullYear());
+var hour = String(todayTime.getHours());
+var minute = String(todayTime.getMinutes());
+var second = String(todayTime.getSeconds());
+return day + "_" + month + "_" + year +"_"+ hour + "_" + minute + "_" +second;
+}
+
 var expect = chai.expect;
 var steps = function() {
 
@@ -12,7 +33,6 @@ var steps = function() {
     browser.driver.ignoreSynchronization = true ;
     browser.driver.get('http://13.126.109.72/home');
 	browser.manage().window().maximize();
-	  console.log("Step 1: Browser was really launched");
     callback();
 //  setTimeout(callback, 10000);
   });
@@ -174,6 +194,12 @@ var steps = function() {
           //     elem.click();
                 elem.getText().then(function(text){ console.log("text last step : 2:  "+text);expect(text).to.contain('Prasanna'); });
           //      expect(lnktext).to.equal('Create Web List.');
+		   var userpath = getUserHome();
+		   var timestamp =  GetFormattedDate();
+		   console.log("Time stamp "+timestamp);
+		         browser.takeScreenshot().then(function (png) {
+        writeScreenShot(png, 'screenshot_'+timestamp+'.png' , userpath+'\\Screenshots\\');
+    });
                 return true;
               });
   }, 15000);
