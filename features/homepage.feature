@@ -15,6 +15,6 @@ Feature: Homepage
 	     And I enter lastname as  "Hegde"
 	     And I enter email as  "prasannarhegde@gmail.com"
 	     And I enter phone as  "9768125870"
-	     And I enter address as  "Airoli Sector 20A Navi Mumbai MAHARASHTRA"
+	     And I enter address as  "Airoli Sector 20A Navi Mumbai MAHARASHTRA 400708"
 	     And I click submit  
     Then I should see "already exists."
