@@ -11,7 +11,7 @@ Feature: Homepage
 	
   Scenario: create record
     Given I click link "Create Web List."
-    When I enter firstname as  "Prasanna"
+    When I enter firstname as  "Prasanna11"
 	     And I enter lastname as  "Hegde"
 	     And I enter email as  "prasannarhegde@gmail.com"
 	     And I enter phone as  "9768125870"
